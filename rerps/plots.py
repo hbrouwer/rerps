@@ -39,7 +39,7 @@ in terms of betas, t-values, and p-values.
 
 """
 
-def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None):
+def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
     """Plots voltages for a single electrode.
 
     Args:
@@ -65,6 +65,9 @@ def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=N
             minimum of y axis
         ymax (:obj:`float`):
             maximum of y axis
+        hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
+            time-window (start, end) tuples to highlight, where start is
+            inclusive and end is non-inclusive.
 
     Returns:
         (:obj:`Figure`, optional): Figure
@@ -102,8 +105,8 @@ def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=N
         ax.fill_between(x_vals, y_lvals, y_uvals, alpha=.2)
 
     ax.grid()
-    ax.axvspan(300,500,  color="grey", alpha=0.2)
-    ax.axvspan(600,1000, color="grey", alpha=0.2)
+    for (start, end) in hlt_tws:
+        ax.axvspan(start, end,  color="grey", alpha=0.2)
     ax.axhline(y=0, color="black")
     ax.axvline(x=0, color="black")
     
@@ -123,7 +126,7 @@ def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=N
     else:
         return ax
 
-def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, ymax=None):
+def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
     """Plots voltages for a grid of electrodes.
 
     Args:
@@ -145,6 +148,9 @@ def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, 
             minimum of y axis
         ymax (:obj:`float`):
             maximum of y axis
+        hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
+            time-window (start, end) tuples to highlight, where start is
+            inclusive and end is non-inclusive.
 
     Returns:
         (:obj:`Figure`): Figure
@@ -158,14 +164,14 @@ def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, 
         if (i == len(ys) - 1):
             legend = True
             axes[i].invert_yaxis()
-        plot_voltages(dsm, x, y, groupby, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax)
+        plot_voltages(dsm, x, y, groupby, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
 
     if (title):
         fig.suptitle(title, fontsize=18, x=.5, y=.95)
    
     return fig, axes
 
-def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None):
+def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
     """Plots coefficients for a single electrode.
     
     Args:
@@ -190,6 +196,9 @@ def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, 
             minimum of y axis
         ymax (:obj:`float`):
             maximum of y axis
+        hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
+            time-window (start, end) tuples to highlight, where start is
+            inclusive and end is non-inclusive.
 
     Returns:
         (:obj:`Figure`, optional): Figure
@@ -226,8 +235,8 @@ def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, 
         ax.fill_between(x_vals, y_lvals, y_uvals, alpha=.2)
 
     ax.grid()
-    ax.axvspan(300,500,  color="grey", alpha=0.2)
-    ax.axvspan(600,1000, color="grey", alpha=0.2)
+    for (start, end) in hlt_tws:
+        ax.axvspan(start, end,  color="grey", alpha=0.2)
     ax.axhline(y=0, color="black")
     ax.axvline(x=0, color="black")
     
@@ -247,7 +256,7 @@ def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, 
     else:
         return ax
 
-def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymin=None, ymax=None):
+def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
     """Plots coefficients for a grid of electrodes.
 
     Args:
@@ -268,6 +277,9 @@ def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymi
             minimum of y axis
         ymax (:obj:`float`):
             maximum of y axis
+        hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
+            time-window (start, end) tuples to highlight, where start is
+            inclusive and end is non-inclusive.
 
     Returns:
         (:obj:`Figure`): Figure
@@ -281,14 +293,14 @@ def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymi
         if (i == len(ys) - 1):
             legend = True
             axes[i].invert_yaxis()
-        plot_coefficients(msm, x, y, anchor=anchor, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax)
+        plot_coefficients(msm, x, y, anchor=anchor, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
 
     if (title):
         fig.suptitle(title, fontsize=18, x=.5, y=.95)
    
     return fig, axes
 
-def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None):
+def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
     """Plots t-values for a single electrode.
     
     Args:
@@ -317,6 +329,9 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
             minimum of y axis
         ymax (:obj:`float`):
             maximum of y axis
+        hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
+            time-window (start, end) tuples to highlight, where start is
+            inclusive and end is non-inclusive.
 
     Returns:
         (:obj:`Figure`, optional): Figure
@@ -355,8 +370,8 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
                 ax.plot(x_val, pval_pos, marker='.', color=colors[i], alpha=.25, markersize=5)
 
     ax.grid()
-    ax.axvspan(300,500,  color="grey", alpha=0.2)
-    ax.axvspan(600,1000, color="grey", alpha=0.2)
+    for (start, end) in hlt_tws:
+        ax.axvspan(start, end,  color="grey", alpha=0.2)
     ax.axhline(y=0, color="black")
     ax.axvline(x=0, color="black")
     
@@ -376,7 +391,7 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
     else:
         return ax
 
-def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, title=None, colors=None, ymin=None, ymax=None):
+def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
     """Plots t-values for a grid of electrodes.
 
     Args:
@@ -401,6 +416,9 @@ def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, tit
             minimum of y axis
         ymax (:obj:`float`):
             maximum of y axis
+        hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
+            time-window (start, end) tuples to highlight, where start is
+            inclusive and end is non-inclusive.
 
     Returns:
         (:obj:`Figure`): Figure
@@ -414,7 +432,7 @@ def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, tit
         if (i == len(ys) - 1):
             legend = True
             axes[i].invert_yaxis()
-        plot_tvalues(msm, x, y, intercept=intercept, pvalues=pvalues, alpha=alpha, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax)
+        plot_tvalues(msm, x, y, intercept=intercept, pvalues=pvalues, alpha=alpha, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
 
     if (title):
         fig.suptitle(title, fontsize=18, x=.5, y=.95)
