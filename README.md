@@ -13,12 +13,12 @@ See also:
 
 # Getting started
 
-Clone this repository, download the relevant data files (see `examples`) and
-decompress them in the relevant `data` folder.
+Clone this repository, download the relevant data files (see `examples/`)
+and decompress them in the relevant `data/` folder.
 
 # Requirements
 
-To run the analyses, you need:
+To run the analyses in `examples/`, you need:
 
 * A recent version of Python 3, with recent versions of:
   * NumPy
