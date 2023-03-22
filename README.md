@@ -34,7 +34,8 @@ analyses in `examples` serve as illustrations of functionality. Examples of
 full rERP analyses using earlier, frozen, versions of `rerps` can be found
 here:
 
-**[[dbc2019rerps](https://github.com/hbrouwer/dbc2019rerps)]** - implements the rERP analysis of:
+[hbrouwer/dbc2019rerps](https://github.com/hbrouwer/dbc2019rerps) implements
+the rERP analysis of:
 
 [Delogu, F., Brouwer, H., and Crocker, M. W. (2019). Event-related potentials index lexical retrieval (N400) and integration (P600) during language comprehension. *Brain and Cognition, 135*. doi: 10.1016/j.bandc.2019.05.007](https://www.sciencedirect.com/science/article/pii/S0278262618304299)
 
@@ -42,6 +43,7 @@ as described in:
 
 [Brouwer, H., Delogu, F., and Crocker, M. W. (2021). Splitting Event-Related Potentials: Modeling Latent Components using Regression-based Waveform Estimation. *European Journal of Neuroscience, 53*, pp. 974-995. doi: 10.1111/ejn.14961](https://onlinelibrary.wiley.com/doi/abs/10.1111/ejn.14961)
 
-**[[dbc2021rerps](https://github.com/hbrouwer/dbc2021rerps)]** - implements the rERP analysis in:
+[hbrouwer/dbc2021rerps](https://github.com/hbrouwer/dbc2021rerps) implements
+the rERP analysis in:
 
 [Delogu, F., Brouwer, H., and Crocker, M. W. (2021). When components collide: Spatiotemporal overlap of the N400 and P600 in language comprehension. *Brain Research*. doi: 10.1016/j.brainres.2021.147514](https://www.sciencedirect.com/science/article/pii/S0006899321003711)
