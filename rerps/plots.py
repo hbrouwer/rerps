@@ -39,7 +39,7 @@ in terms of betas, t-values, and p-values.
 
 """
 
-def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
+def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300,500), (600,1000)]):
     """Plots voltages for a single electrode.
 
     Args:
@@ -126,7 +126,7 @@ def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=N
     else:
         return ax
 
-def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
+def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300,500), (600,1000)]):
     """Plots voltages for a grid of electrodes.
 
     Args:
@@ -171,7 +171,7 @@ def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, 
    
     return fig, axes
 
-def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
+def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300,500), (600,1000)]):
     """Plots coefficients for a single electrode.
     
     Args:
@@ -256,7 +256,7 @@ def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, 
     else:
         return ax
 
-def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
+def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300,500), (600,1000)]):
     """Plots coefficients for a grid of electrodes.
 
     Args:
@@ -300,7 +300,7 @@ def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymi
    
     return fig, axes
 
-def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
+def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=None, legend=True, ax=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300,500), (600,1000)]):
     """Plots t-values for a single electrode.
     
     Args:
@@ -391,7 +391,7 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
     else:
         return ax
 
-def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300, 500), (800, 1000)]):
+def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, title=None, colors=None, ymin=None, ymax=None, hlt_tws=[(300,500), (600,1000)]):
     """Plots t-values for a grid of electrodes.
 
     Args:
