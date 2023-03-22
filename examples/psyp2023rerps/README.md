@@ -4,8 +4,9 @@ Example regression-based waveform estimation analysis of:
 
 [Aurnhammer, C., Delogu, F., Brouwer, H., and Crocker, M. W. (in press). The P600 as a Continuous Index of Integration Effort. Psychophysiology.](mailto:me-at-hbrouwer.eu).
 
-See [caurhammer/psyp23rerps](https://github.com/caurnhammer/psyp23rerps)]
-for the full rERP analysis reported in the paper.
+**Note: see
+[caurhammer/psyp23rerps](https://github.com/caurnhammer/psyp23rerps)] for
+the full rERP analysis reported in the paper.**
 
 # Data
 
