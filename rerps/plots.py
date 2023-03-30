@@ -54,23 +54,23 @@ def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=N
             name of the descriptor column that determines the grouping
             (typically 'condition').
         title (:obj:`str`):
-            title of the graph
+            title of the graph.
         legend (:obj:`bool`):
             flags whether a legend should be added.
         ax (:obj:`Axes`):
             axes.Axes object to plot to.
         colors (:obj:`list` of :obj:`str`):
-            list of colors to use for plotting
+            list of colors to use for plotting.
         ymin (:obj:`float`):
-            minimum of y axis
+            minimum of y axis.
         ymax (:obj:`float`):
-            maximum of y axis
+            maximum of y axis.
         hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
             time-window (start, end) tuples to highlight, where start is
             inclusive and end is non-inclusive.
 
     Returns:
-        (:obj:`Figure`, optional): Figure
+        (:obj:`Figure`, optional): Figure.
         (:obj:`Axes`): axes.Axes object.
 
     """
@@ -135,36 +135,48 @@ def plot_voltages_grid(dsm, x, ys, groupby, title=None, colors=None, ymin=None, 
         x (:obj:`str`):
             name of the descriptor column that determines the x-axis
             (typically 'time').
-        ys (:obj:`list` of :obj:`str`):
-            names of electrodes to be plotted.
+        ys (:obj:`list` of :obj`list` of :obj:`str`):
+            electrode array to be plotted.
         groupby (:obj:`str`):
             name of the descriptor column that determines the grouping
             (typically 'condition').
         title (:obj:`str`):
-            global title of the graph
+            global title of the graph.
         colors (:obj:`list` of :obj:`str`):
-            list of colors to use for plotting
+            list of colors to use for plotting.
         ymin (:obj:`float`):
-            minimum of y axis
+            minimum of y axis.
         ymax (:obj:`float`):
-            maximum of y axis
+            maximum of y axis.
         hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
             time-window (start, end) tuples to highlight, where start is
             inclusive and end is non-inclusive.
 
     Returns:
-        (:obj:`Figure`): Figure
+        (:obj:`Figure`): Figure.
         (:obj:`Axes`): axes.Axes object.
 
     """
-    fig, axes = plt.subplots(len(ys), sharey=True)
+    fig, axes = plt.subplots(len(ys)+1, len(ys[0])+2, sharey=True)
 
-    legend = False
-    for i, y in enumerate(ys):
-        if (i == len(ys) - 1):
-            legend = True
-            axes[i].invert_yaxis()
-        plot_voltages(dsm, x, y, groupby, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
+    for r in range(0, len(ys)+1):
+        axes[r,0].set_visible(False)
+        axes[r,len(ys[0])+1].set_visible(False)
+        for c in range(0, len(ys[0])+2):
+            axes[len(ys),c].set_visible(False)
+    
+    axes[0,0].invert_yaxis()
+    
+    for r, electrodes in enumerate(ys):
+        for c, y in enumerate(electrodes):
+            if (y == "##"):
+                axes[r,c+1].set_visible(False)
+            else:
+                legend = False
+                if (y[len(y)-1] == '+'):
+                    legend = True;
+                    y = y[0:len(y)-1]
+                plot_voltages(dsm, x, y, groupby, title=y, legend=legend, ax=axes[r,c+1], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
 
     if (title):
         fig.suptitle(title, fontsize=18, x=.5, y=.95)
@@ -185,23 +197,23 @@ def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, 
         anchor (:obj:`bool`):
             flags whether slopes should be anchored to the intercept.
         title (:obj:`str`):
-            global title of the graph
+            global title of the graph.
         legend (:obj:`bool`):
             flags whether a legend should be added.
         ax (:obj:`Axes`):
             axes.Axes object to plot to.
         colors (:obj:`list` of :obj:`str`):
-            list of colors to use for plotting
+            list of colors to use for plotting.
         ymin (:obj:`float`):
-            minimum of y axis
+            minimum of y axis.
         ymax (:obj:`float`):
-            maximum of y axis
+            maximum of y axis.
         hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
             time-window (start, end) tuples to highlight, where start is
             inclusive and end is non-inclusive.
 
     Returns:
-        (:obj:`Figure`, optional): Figure
+        (:obj:`Figure`, optional): Figure.
         (:obj:`Axes`): axes.Axes object.
     
     """
@@ -265,35 +277,47 @@ def plot_coefficients_grid(msm, x, ys, anchor=True, title=None, colors=None, ymi
         x (:obj:`str`):
             name of the descriptor column that determines the x-axis
             (typically 'time').
-        ys (:obj:`list` of :obj:`str`):
-            names of electrodes to be plotted.
+        ys (:obj:`list` of :obj`list` of :obj:`str`):
+            electrode array to be plotted.
         anchor (:obj:`bool`):
             flags whether slopes should be anchored to the intercept.
         title (:obj:`str`):
-            global title of the graph
+            global title of the graph.
         colors (:obj:`list` of :obj:`str`):
-            list of colors to use for plotting
+            list of colors to use for plotting.
         ymin (:obj:`float`):
-            minimum of y axis
+            minimum of y axis.
         ymax (:obj:`float`):
-            maximum of y axis
+            maximum of y axis.
         hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
             time-window (start, end) tuples to highlight, where start is
             inclusive and end is non-inclusive.
 
     Returns:
-        (:obj:`Figure`): Figure
+        (:obj:`Figure`): Figure.
         (:obj:`Axes`): axes.Axes object.
 
     """
-    fig, axes = plt.subplots(len(ys), sharey=True)
+    fig, axes = plt.subplots(len(ys)+1, len(ys[0])+2, sharey=True)
 
-    legend = False
-    for i, y in enumerate(ys):
-        if (i == len(ys) - 1):
-            legend = True
-            axes[i].invert_yaxis()
-        plot_coefficients(msm, x, y, anchor=anchor, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
+    for r in range(0, len(ys)+1):
+        axes[r,0].set_visible(False)
+        axes[r,len(ys[0])+1].set_visible(False)
+        for c in range(0, len(ys[0])+2):
+            axes[len(ys),c].set_visible(False)
+    
+    axes[0,0].invert_yaxis()
+    
+    for r, electrodes in enumerate(ys):
+        for c, y in enumerate(electrodes):
+            if (y == "##"):
+                axes[r,c+1].set_visible(False)
+            else:
+                legend = False
+                if (y[len(y)-1] == '+'):
+                    legend = True;
+                    y = y[0:len(y)-1]
+                plot_coefficients(msm, x, y, anchor=anchor, title=y, legend=legend, ax=axes[r,c+1], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
 
     if (title):
         fig.suptitle(title, fontsize=18, x=.5, y=.95)
@@ -318,23 +342,23 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
         alpha (:obj:`float`):
             significance level.
         title (:obj:`str`):
-            global title of the graph
+            global title of the graph.
         legend (:obj:`bool`):
             flags whether a legend should be added.
         ax (:obj:`Axes`):
             axes.Axes object to plot to.
         colors (:obj:`list` of :obj:`str`):
-            list of colors to use for plotting
+            list of colors to use for plotting.
         ymin (:obj:`float`):
-            minimum of y axis
+            minimum of y axis.
         ymax (:obj:`float`):
-            maximum of y axis
+            maximum of y axis.
         hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
             time-window (start, end) tuples to highlight, where start is
             inclusive and end is non-inclusive.
 
     Returns:
-        (:obj:`Figure`, optional): Figure
+        (:obj:`Figure`, optional): Figure.
         (:obj:`Axes`): axes.Axes object.
     
     """
@@ -367,7 +391,7 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
                 pval_pos = np.max(y_vals) + pval_off
                 if (np.abs(np.min(y_vals)) > pval_pos):
                     pval_pos = np.min(y_vals) - pval_off
-                ax.plot(x_val, pval_pos, marker='.', color=colors[i], alpha=.25, markersize=5)
+                ax.plot(x_val, pval_pos, marker='|', color=colors[i], alpha=.5, markersize=5)
 
     ax.grid()
     for (start, end) in hlt_tws:
@@ -400,8 +424,8 @@ def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, tit
         x (:obj:`str`):
             name of the descriptor column that determines the x-axis
             (typically 'time').
-        ys (:obj:`list` of :obj:`str`):
-            names of electrodes to be plotted.
+        ys (:obj:`list` of :obj`list` of :obj:`str`):
+            electrode array to be plotted.
         intercept (:obj:`bool`):
             flags whether t-values for intercept should be plotted.
         pvalues (:obj:`bool`):
@@ -409,30 +433,43 @@ def plot_tvalues_grid(msm, x, ys, intercept=False, pvalues=True, alpha=0.05, tit
         alpha (:obj:`float`):
             significance level.
         title (:obj:`str`):
-            global title of the graph
+            global title of the graph.
         colors (:obj:`list` of :obj:`str`):
-            list of colors to use for plotting
+            list of colors to use for plotting.
         ymin (:obj:`float`):
-            minimum of y axis
+            minimum of y axis.
         ymax (:obj:`float`):
-            maximum of y axis
+            maximum of y axis.
         hlt_tws (:obj:`list` of :obj:`tuple` of :obj:`int`):
             time-window (start, end) tuples to highlight, where start is
             inclusive and end is non-inclusive.
 
     Returns:
-        (:obj:`Figure`): Figure
+        (:obj:`Figure`): Figure.
         (:obj:`Axes`): axes.Axes object.
 
     """
-    fig, axes = plt.subplots(len(ys), sharey=True)
+    fig, axes = plt.subplots(len(ys)+1, len(ys[0])+2, sharey=True)
 
-    legend = False
-    for i, y in enumerate(ys):
-        if (i == len(ys) - 1):
-            legend = True
-            axes[i].invert_yaxis()
-        plot_tvalues(msm, x, y, intercept=intercept, pvalues=pvalues, alpha=alpha, title=y, legend=legend, ax=axes[i], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
+
+    for r in range(0, len(ys)+1):
+        axes[r,0].set_visible(False)
+        axes[r,len(ys[0])+1].set_visible(False)
+        for c in range(0, len(ys[0])+2):
+            axes[len(ys),c].set_visible(False)
+    
+    axes[0,0].invert_yaxis()
+    
+    for r, electrodes in enumerate(ys):
+        for c, y in enumerate(electrodes):
+            if (y == "##"):
+                axes[r,c+1].set_visible(False)
+            else:
+                legend = False
+                if (y[len(y)-1] == '+'):
+                    legend = True;
+                    y = y[0:len(y)-1]
+                plot_tvalues(msm, x, y, intercept=intercept, pvalues=pvalues, alpha=alpha, title=y, legend=legend, ax=axes[r,c+1], colors=colors, ymin=ymin, ymax=ymax, hlt_tws=hlt_tws)
 
     if (title):
         fig.suptitle(title, fontsize=18, x=.5, y=.95)
