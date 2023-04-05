@@ -453,9 +453,12 @@ class DataSummary(SetSummary):
         print("[DataSummary.save()]: Saving data ...")
         cols = ["" for i in range(sum(map(len, 
             [self.descriptors.items(), self.electrodes.items(), self.electrodes.items()])))]
-        for c, i in self.descriptors.items(): cols[i] = c
-        for c, i in self.electrodes.items():  cols[i] = c + ":mean"
-        for c, i in self.electrodes.items():  cols[i + len(self.electrodes.items())] = c + ":se"
+        for c, i in self.descriptors.items():
+            cols[i] = c
+        for c, i in self.electrodes.items():
+            cols[i] = "mean:" + c
+        for c, i in self.electrodes.items():
+            cols[i + len(self.electrodes.items())] = "se:" + c
         array = np.hstack((
             self.means[:,:len(self.descriptors.items())],
             self.means[:,len(self.descriptors.items()):],
@@ -484,9 +487,9 @@ class ModelSummary(SetSummary):
             standard errors of the mean coefficients for each electrode by
             descriptor columns (dv).
         tvals (:obj:`ndarray`):
-            t-values for each coeffcients for each electrode by descriptor columns (dv).
+            t-value for each coeffcient for each electrode by descriptor columns (dv).
         pvals (:obj:`ndarray`):
-        
+            p-value for each coeffcient for each electrode by descriptor columns (dv).
         descriptors (:obj:`OrderedDict`):
             mapping of descriptor column names (keys) to column
             indices (values).
@@ -566,15 +569,22 @@ class ModelSummary(SetSummary):
         st = time.time()
         
         print("[ModelSummary.save()]: Saving data ...")
-        cols = ["" for i in range(sum(map(len, 
-            [self.descriptors.items(), self.coefficients.items(), self.coefficients.items()])))]
+        cols = ["" for i in range(len(self.descriptors.items()) + len(self.coefficients.items())*4)]
         for c, i in self.descriptors.items(): cols[i] = c
-        for (e, c), i in self.coefficients.items(): cols[i] = e + ":" + c + ":mean"
-        for (e, c), i in self.coefficients.items(): cols[i + len(self.coefficients.items())] = e + ":" + c + ":se"
+        for (t, e, c), i in self.coefficients.items():
+            cols[i] = "beta:" + e + ":" + c
+        for (t, e, c), i in self.coefficients.items():
+            cols[i + len(self.coefficients.items())*1] = "se:"   + e + ":" + c
+        for (t, e, c), i in self.coefficients.items():
+            cols[i + len(self.coefficients.items())*2] = "tval:" + e + ":" + c
+        for (t, e, c), i in self.coefficients.items():
+            cols[i + len(self.coefficients.items())*3] = "pval:" + e + ":" + c
         array = np.hstack((
             self.means[:,:len(self.descriptors.items())],
             self.means[:,len(self.descriptors.items()):],
-            self.sems[:,len(self.descriptors.items()):]))
+            self.serrs[:,len(self.descriptors.items()):],
+            self.tvals[:,len(self.descriptors.items()):],
+            self.pvals[:,len(self.descriptors.items()):]))
         df = pd.DataFrame(data=array, index=None, columns=cols)
         df.to_csv(filename, index=False)
 
