@@ -19,7 +19,7 @@ def generate():
         descriptors = ["Subject", "Timestamp", "Condition", "ItemNum"],
         electrodes  = ["F3" , "Fz", "F4", "FC5", "FC1", "FC2", "FC6", "C3",  "Cz", "C4",
                        "CP5", "CP1", "CP2", "CP6", "P3","Pz", "P4", "O1",  "Oz", "O2"],
-        predictors  = ["Plaus","Assoc", "Cloze"])
+        predictors  = ["Plaus", "Assoc", "Cloze"])
 
     obs_data.rename_descriptor_level("Condition", "baseline",    "A: Related-Plausible")
     obs_data.rename_descriptor_level("Condition", "plausible",   "B: Unrelated-Plausible")

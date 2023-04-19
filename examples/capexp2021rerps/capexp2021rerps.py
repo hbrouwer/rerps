@@ -22,7 +22,7 @@ def generate():
                        # "CP2", "CP6", "P7", "P3", "Pz", "P4", "P8", "O1",
                        # "Oz", "O2"],
         electrodes  = ["Fz", "Cz", "Pz"],
-        predictors  = ["Cloze","rcnoun"])
+        predictors  = ["Cloze", "rcnoun"])
  
     obs_data.rename_descriptor_level("Condition", "A", "A: A+E+")
     obs_data.rename_descriptor_level("Condition", "B", "B: A-E+")

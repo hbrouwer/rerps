@@ -20,7 +20,7 @@ def generate():
                        "FC1", "FC2", "FC6", "C3", "Cz", "C4", "CP5", "CP1",
                        "CP2", "CP6", "P7", "P3", "Pz", "P4", "P8", "O1",
                        "Oz", "O2"],
-        predictors  = ["Plaus","Cloze_distractor"])
+        predictors  = ["Plaus", "Cloze_distractor"])
  
     obs_data.rename_predictor("Plaus",            "plausibility")
     obs_data.rename_predictor("Cloze_distractor", "dist-cloze")
