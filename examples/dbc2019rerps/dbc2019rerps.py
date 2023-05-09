@@ -57,7 +57,7 @@ def generate():
     obs_data_summary = rerps.models.DataSummary(obs_data, ["Condition", "Subject", "Timestamp"])
     obs_data_summary = rerps.models.DataSummary(obs_data_summary, ["Condition", "Timestamp"])
     colors = ["#1f77b4", "#ff7f0e", "#2ca02c"]
-    fig, ax = rerps.plots.plot_voltages_grid(obs_data_summary, "Timestamp", array, #array,
+    fig, ax = rerps.plots.plot_voltages_grid(obs_data_summary, "Timestamp", array,
             "Condition", title="Event-Related Potentials", colors=colors, hlt_tws=[(300,500), (800,1000)])
     fig.set_size_inches(30, 15)
     fig.savefig("figures/dbc19_potentials.pdf", bbox_inches='tight')
