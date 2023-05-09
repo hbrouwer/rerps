@@ -113,6 +113,9 @@ def plot_voltages(dsm, x, y, groupby, title=None, legend=True, ax=None, colors=N
     ax.tick_params(axis="both", which="major", labelsize=12)
     ax.tick_params(axis="both", which="minor", labelsize=12)
     
+    ax.xaxis.set_tick_params(labelbottom=True)
+    ax.yaxis.set_tick_params(labelleft=True)
+
     if (ymin and ymax):
         ax.set_ylim(ymin, ymax)
     
@@ -255,6 +258,9 @@ def plot_coefficients(msm, x, y, anchor=True, title=None, legend=True, ax=None, 
     ax.tick_params(axis="both", which="major", labelsize=12)
     ax.tick_params(axis="both", which="minor", labelsize=12)
     
+    ax.xaxis.set_tick_params(labelbottom=True)
+    ax.yaxis.set_tick_params(labelleft=True)
+
     if (ymin and ymax):
         ax.set_ylim(ymin, ymax)
     
@@ -402,6 +408,9 @@ def plot_tvalues(msm, x, y, intercept=False, pvalues=True, alpha=0.05, title=Non
     ax.tick_params(axis="both", which="major", labelsize=12)
     ax.tick_params(axis="both", which="minor", labelsize=12)
     
+    ax.xaxis.set_tick_params(labelbottom=True)
+    ax.yaxis.set_tick_params(labelleft=True)
+
     if (ymin and ymax):
         ax.set_ylim(ymin, ymax)
 
