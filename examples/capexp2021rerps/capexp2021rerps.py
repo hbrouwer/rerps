@@ -114,7 +114,7 @@ def generate():
     fig, ax = rerps.plots.plot_tvalues_grid(models_summary, "Timestamp", array, intercept=False,
             pvalues=True, alpha=0.05, title="t-values", colors=colors, hlt_tws=[(300,500), (600,1000)])
     fig.set_size_inches(30, 15)
-    fig.savefig("figures/capexp21_clozes+noun-assoc_tval_across.pdf", bbox_inches='tight')
+    fig.savefig("figures/capexp21_cloze+noun-assoc_tval_across.pdf", bbox_inches='tight')
 
 ###########################################################################
 ###########################################################################
